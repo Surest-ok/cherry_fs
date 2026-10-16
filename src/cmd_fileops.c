@@ -12,7 +12,6 @@
 #include "cherry_printk.h"
 #include "cherry_vfs.h"
 #include "vfs_posix.h"
-#include "cherry_ext4.h"
 #include "cherry_fstools.h"
 
 /* =========================================================================
@@ -261,7 +260,7 @@ int cmd_mkfs(int argc, char **argv)
     }
     const char *dev = argv[1];
     const char *vol = (argc >= 3) ? argv[2] : "ext4";
-    return ext4_mkfs(dev, vol);
+    return vfs_mkfs("ext4", dev, vol);
 }
 
 int cmd_fsck(int argc, char **argv)
@@ -272,5 +271,5 @@ int cmd_fsck(int argc, char **argv)
     }
     const char *dev = argv[1];
     bool repair = (argc >= 3 && strcmp(argv[2], "-y") == 0);
-    return ext4_fsck(dev, repair);
+    return vfs_fsck("ext4", dev, repair);
 }

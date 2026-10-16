@@ -10,7 +10,7 @@
 #include <string.h>
 #include "cherry_fstools.h"
 #include "fdisk.h"
-#include "cherry_ext4.h"
+#include "vfs_core.h"
 #include "vfs_dev.h"
 #include "vfs_posix.h"
 #include "cherry_printk.h"
@@ -45,7 +45,7 @@ void cherry_fstools_run_tests(void)
     }
 
     /* 3. Format partition /dev/mmcblk0p1 with Ext4 */
-    int m_ret = ext4_mkfs("/dev/mmcblk0p1", "part1_fs");
+    int m_ret = vfs_mkfs("ext4", "/dev/mmcblk0p1", "part1_fs");
     mkfs_pass = (m_ret == 0);
 
     /* 4. Mount partition on /mnt/part1 */
@@ -87,7 +87,7 @@ void cherry_fstools_run_tests(void)
     }
 
     /* 9. Verify with fsck */
-    int f_ret = ext4_fsck("/dev/mmcblk0p1", false);
+    int f_ret = vfs_fsck("ext4", "/dev/mmcblk0p1", false);
     if (f_ret != 0) {
         mkfs_pass = false;
     }

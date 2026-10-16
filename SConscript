@@ -8,8 +8,6 @@ fstools_env = env.Clone()
 fstools_env.Append(CPPPATH=[
     '#components/cherry_fstools/include',
     '#components/cherry_fstools/tests',
-    '#components/cherry_ext4/include',
-    '#components/cherry_ext4/tests',
     '#components/cherry_vfs/include',
     '#components/cherry_vfs/tests',
     '#components/cherry_kal/include',
